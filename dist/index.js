@@ -13,17 +13,13 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var Department = (function () {
-    function Department(id, name, employees) {
+    function Department(id, employees) {
         if (employees === void 0) { employees = []; }
         this.id = id;
-        this.name = name;
         this.employees = employees;
     }
     Department.createEmployee = function (name) {
         return { name: name };
-    };
-    Department.prototype.describe = function () {
-        console.log("Departamento: " + this.id + ", " + this.name);
     };
     Department.prototype.addEmployee = function (employee) {
         this.employees.push(employee);
@@ -38,16 +34,19 @@ var Department = (function () {
 var ITDepartment = (function (_super) {
     __extends(ITDepartment, _super);
     function ITDepartment(id, admins) {
-        var _this = _super.call(this, id, "IT") || this;
+        var _this = _super.call(this, id) || this;
         _this.admins = admins;
         return _this;
     }
+    ITDepartment.prototype.describe = function () {
+        console.log("IT department - ID: " + this.id);
+    };
     return ITDepartment;
 }(Department));
 var AccountingDepartment = (function (_super) {
     __extends(AccountingDepartment, _super);
     function AccountingDepartment(id, reports) {
-        var _this = _super.call(this, id, "IT") || this;
+        var _this = _super.call(this, id) || this;
         _this.reports = reports;
         _this.lastReport = reports[0];
         return _this;
@@ -72,6 +71,9 @@ var AccountingDepartment = (function (_super) {
         this.reports.push(text);
         this.lastReport = text;
     };
+    AccountingDepartment.prototype.describe = function () {
+        console.log("Accounting department - ID: " + this.id);
+    };
     AccountingDepartment.prototype.addEmployee = function (name) {
         if (name === "Max") {
             return;
@@ -85,17 +87,5 @@ var AccountingDepartment = (function (_super) {
 }(Department));
 var Raimundo = new ITDepartment("2", ["MAX"]);
 var accounting = new AccountingDepartment("3", []);
-console.log(Department.fiscalYear);
-Raimundo.addEmployee("Max");
-Raimundo.addEmployee("Manu");
-Raimundo.addEmployee("Anna");
 Raimundo.describe();
-Raimundo.printEmployeeInformation();
-console.log(Raimundo);
-accounting.addReport("BOA");
-accounting.printReports();
-accounting.addEmployee("Max");
-accounting.addEmployee("Manu");
-console.log(accounting.mostRecentReport);
-accounting.mostRecentReport = "text";
-console.log(accounting);
+accounting.describe();
