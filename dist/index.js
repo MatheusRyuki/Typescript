@@ -67,6 +67,13 @@ var AccountingDepartment = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    AccountingDepartment.getInstance = function () {
+        if (AccountingDepartment.instance) {
+            return this.instance;
+        }
+        this.instance = new AccountingDepartment("3", []);
+        return this.instance;
+    };
     AccountingDepartment.prototype.addReport = function (text) {
         this.reports.push(text);
         this.lastReport = text;
@@ -86,6 +93,6 @@ var AccountingDepartment = (function (_super) {
     return AccountingDepartment;
 }(Department));
 var Raimundo = new ITDepartment("2", ["MAX"]);
-var accounting = new AccountingDepartment("3", []);
+var accounting = AccountingDepartment.getInstance();
 Raimundo.describe();
-accounting.describe();
+console.log(accounting);
