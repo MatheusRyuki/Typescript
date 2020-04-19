@@ -49,3 +49,15 @@ var useVehicle = function (vehicle) {
 };
 useVehicle(v1);
 useVehicle(v2);
+var moveAnimal = function (animal) {
+    var speed;
+    switch (animal.type) {
+        case "bird":
+            speed = animal.flyingSpeed;
+            break;
+        case "horse":
+            speed = animal.groundSpeed;
+    }
+    console.log("Movendo com a velocidade de " + speed);
+};
+moveAnimal({ type: "horse", groundSpeed: 10 });
