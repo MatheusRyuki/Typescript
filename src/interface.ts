@@ -5,7 +5,7 @@ interface AddFn {
 let add: AddFn;
 
 add = (n1: number, n2: number) => {
- return n1 + n2;
+  return n1 + n2;
 };
 
 interface Named {
@@ -28,7 +28,7 @@ class Person implements Greetable {
   }
 
   greet(phrase: string) {
-    console.log(`${phrase}, ${this.name}`)
+    console.log(`${phrase}, ${this.name}`);
   }
 }
 

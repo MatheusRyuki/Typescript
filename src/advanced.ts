@@ -1,12 +1,12 @@
 type Admin = {
   name: string;
   privileges: string[];
-}
+};
 
 type Employee = {
   name: string;
   startDate: Date;
-}
+};
 
 type ElevatedEmployee = Admin & Employee;
 
@@ -14,7 +14,7 @@ const el: ElevatedEmployee = {
   name: "Fernando",
   privileges: ["create-server"],
   startDate: new Date(),
-}
+};
 
 type Combinable = string | number;
 type Numeric = number | boolean;
@@ -25,19 +25,19 @@ const adicionar = (a: Combinable, b: Combinable) => {
     return a.toString() + b.toString();
   }
   return a + b;
-}
+};
 
 type UnknownEmployee = Employee | Admin;
 
 const printEmployeeInformation = (emp: UnknownEmployee) => {
   console.log(`Nome: ${emp.name}`);
   if ("privileges" in emp) {
-    console.log(`Privilégios: ${emp.privileges}`)
+    console.log(`Privilégios: ${emp.privileges}`);
   }
   if ("startDate" in emp) {
-    console.log(`Início em: ${emp.startDate}`)
+    console.log(`Início em: ${emp.startDate}`);
   }
-}
+};
 
 printEmployeeInformation(el);
 
@@ -67,7 +67,7 @@ const useVehicle = (vehicle: Vehicle) => {
   if (vehicle instanceof Truck) {
     vehicle.loadCargo(100);
   }
-}
+};
 
 useVehicle(v1);
 useVehicle(v2);
