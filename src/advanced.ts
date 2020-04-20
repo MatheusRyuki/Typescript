@@ -1,3 +1,5 @@
+// Intersecção de tipos
+
 type Admin = {
   name: string;
   privileges: string[];
@@ -41,6 +43,8 @@ const printEmployeeInformation = (emp: UnknownEmployee) => {
 
 printEmployeeInformation(el);
 
+// Mais tipos de guarda
+
 class Car {
   drive() {
     console.log("Dirigindo...");
@@ -72,6 +76,8 @@ const useVehicle = (vehicle: Vehicle) => {
 useVehicle(v1);
 useVehicle(v2);
 
+// Uniões discriminadas
+
 interface Bird {
   type: "bird";
   flyingSpeed: number;
@@ -98,6 +104,17 @@ const moveAnimal = (animal: Animal) => {
 
 moveAnimal({type: "horse", groundSpeed: 10})
 
+// Castando tipos
 const paragraph = <HTMLInputElement>document.getElementById("user-input")! as HTMLInputElement;
-
 paragraph.value = "Alô";
+
+// Propriedades de Index
+interface ErrorContainer {
+  [prop: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+  email: "E-mail não válido",
+  usuario: "Precisa começar com uma letra maiuscúla"
+};
+

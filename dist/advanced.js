@@ -63,3 +63,7 @@ var moveAnimal = function (animal) {
 moveAnimal({ type: "horse", groundSpeed: 10 });
 var paragraph = document.getElementById("user-input");
 paragraph.value = "Alô";
+var errorBag = {
+    email: "E-mail não válido",
+    usuario: "Precisa começar com uma letra maiuscúla"
+};
