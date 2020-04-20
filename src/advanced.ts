@@ -140,3 +140,11 @@ const fetchedUserData = {
 }
 
 console.log(fetchedUserData?.job?.title);
+
+// Coleção de Null
+
+const userInput = null;
+
+const storedData = userInput ?? "padrão";
+
+console.log(storedData);

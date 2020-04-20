@@ -80,3 +80,6 @@ var fetchedUserData = {
     }
 };
 console.log((_a = fetchedUserData === null || fetchedUserData === void 0 ? void 0 : fetchedUserData.job) === null || _a === void 0 ? void 0 : _a.title);
+var userInput = null;
+var storedData = userInput !== null && userInput !== void 0 ? userInput : "padrão";
+console.log(storedData);
