@@ -61,3 +61,5 @@ var moveAnimal = function (animal) {
     console.log("Movendo com a velocidade de " + speed);
 };
 moveAnimal({ type: "horse", groundSpeed: 10 });
+var paragraph = document.getElementById("user-input");
+paragraph.value = "Alô";

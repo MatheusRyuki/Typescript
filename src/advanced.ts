@@ -97,3 +97,7 @@ const moveAnimal = (animal: Animal) => {
 }
 
 moveAnimal({type: "horse", groundSpeed: 10})
+
+const paragraph = <HTMLInputElement>document.getElementById("user-input")! as HTMLInputElement;
+
+paragraph.value = "Alô";
