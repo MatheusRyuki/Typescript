@@ -4,12 +4,13 @@ var el = {
     privileges: ["create-server"],
     startDate: new Date(),
 };
-var adicionar = function (a, b) {
+function adicionar(a, b) {
     if (typeof a === "string" || typeof b === "string") {
         return a.toString() + b.toString();
     }
     return a + b;
-};
+}
+;
 var printEmployeeInformation = function (emp) {
     console.log("Nome: " + emp.name);
     if ("privileges" in emp) {
@@ -67,3 +68,5 @@ var errorBag = {
     email: "E-mail não válido",
     usuario: "Precisa começar com uma letra maiuscúla"
 };
+var result = adicionar("Max", "raimundo");
+result.split(" ");

@@ -22,12 +22,17 @@ type Combinable = string | number;
 type Numeric = number | boolean;
 type Universal = Combinable & Numeric;
 
-const adicionar = (a: Combinable, b: Combinable) => {
+
+function adicionar(a: string, b: string):string;
+function adicionar(a: number, b: number):number;
+function adicionar (a: Combinable, b: Combinable) {
   if (typeof a === "string" || typeof b === "string") {
     return a.toString() + b.toString();
   }
   return a + b;
 };
+
+
 
 type UnknownEmployee = Employee | Admin;
 
@@ -118,3 +123,7 @@ const errorBag: ErrorContainer = {
   usuario: "Precisa começar com uma letra maiuscúla"
 };
 
+// Sobrecarregamento de Função
+
+const result = adicionar("Max", "raimundo");
+result.split(" ");
