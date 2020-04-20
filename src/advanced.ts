@@ -127,3 +127,16 @@ const errorBag: ErrorContainer = {
 
 const result = adicionar("Max", "raimundo");
 result.split(" ");
+
+// Chaining Opcional
+
+const fetchedUserData = {
+  id: "u1",
+  name: "Max",
+  job: {
+    title: "CEO",
+    description: "Minha Empresa",
+  } 
+}
+
+console.log(fetchedUserData?.job?.title);
