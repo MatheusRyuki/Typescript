@@ -23,3 +23,19 @@ const mergeObj = merge<{ nome: string; hobby: string[] }, { idade: number }>(
 );
 console.log(mergeObj.hobby);
 
+// Outra função genérica 
+
+interface Lengthy {
+  length: number;
+}
+
+const countAndDescribe = <T extends Lengthy>(element: T) => {
+  let descriptionText = "Sem valor";
+  if (element.length > 0) {
+    descriptionText = `Tem ${element.length} elementos`;
+  }
+
+  return [element, descriptionText];
+};
+
+console.log(countAndDescribe(["Teste", "Esportes"]));
