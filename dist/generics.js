@@ -6,7 +6,6 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
             r[k] = a[j];
     return r;
 };
-var names = [];
 var promise = new Promise(function (resolve) {
     setTimeout(function () {
         resolve("FEITO!");
@@ -52,3 +51,11 @@ textStorage.addItem("Max");
 textStorage.addItem("Manu");
 textStorage.removeItem("Max");
 console.log(textStorage.getItems());
+var createCourseGoal = function (title, description, date) {
+    var courseGoal = {};
+    courseGoal.title = title;
+    courseGoal.description = description;
+    courseGoal.completeUntil = date;
+    return courseGoal;
+};
+var names = ["Max", "Manu"];

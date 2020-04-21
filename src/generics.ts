@@ -1,6 +1,4 @@
 // genéricos
-const names: Array<string> = [];
-
 const promise: Promise<string> = new Promise((resolve) => {
   setTimeout(() => {
     resolve("FEITO!");
@@ -74,3 +72,29 @@ textStorage.addItem("Max");
 textStorage.addItem("Manu");
 textStorage.removeItem("Max");
 console.log(textStorage.getItems());
+
+// Tipos de utilitários genéricos
+
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+const createCourseGoal = (
+  title: string,
+  description: string,
+  date: Date
+): CourseGoal => {
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completeUntil = date;
+
+  return courseGoal as CourseGoal;
+};
+
+const names: Readonly<string[]> = ["Max", "Manu"];
+
+// names.push("MAx"); <---- erro porque é readonly
+/* Genéricos são fixos em relação ao tipo nas instâncias, enquanto nos Tipos de União são variáveis, causando imprevisibilidade. */
