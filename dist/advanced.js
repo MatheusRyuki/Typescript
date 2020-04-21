@@ -11,7 +11,6 @@ function adicionar(a, b) {
     }
     return a + b;
 }
-;
 var printEmployeeInformation = function (emp) {
     console.log("Nome: " + emp.name);
     if ("privileges" in emp) {
@@ -63,11 +62,11 @@ var moveAnimal = function (animal) {
     console.log("Movendo com a velocidade de " + speed);
 };
 moveAnimal({ type: "horse", groundSpeed: 10 });
-var paragraph = document.getElementById("user-input");
+var paragraph = (document.getElementById("user-input"));
 paragraph.value = "Alô";
 var errorBag = {
     email: "E-mail não válido",
-    usuario: "Precisa começar com uma letra maiuscúla"
+    usuario: "Precisa começar com uma letra maiuscúla",
 };
 var result = adicionar("Max", "raimundo");
 result.split(" ");
@@ -77,7 +76,7 @@ var fetchedUserData = {
     job: {
         title: "CEO",
         description: "Minha Empresa",
-    }
+    },
 };
 console.log((_a = fetchedUserData === null || fetchedUserData === void 0 ? void 0 : fetchedUserData.job) === null || _a === void 0 ? void 0 : _a.title);
 var userInput = null;

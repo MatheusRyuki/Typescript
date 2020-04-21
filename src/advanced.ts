@@ -22,17 +22,14 @@ type Combinable = string | number;
 type Numeric = number | boolean;
 type Universal = Combinable & Numeric;
 
-
-function adicionar(a: string, b: string):string;
-function adicionar(a: number, b: number):number;
-function adicionar (a: Combinable, b: Combinable) {
+function adicionar(a: string, b: string): string;
+function adicionar(a: number, b: number): number;
+function adicionar(a: Combinable, b: Combinable) {
   if (typeof a === "string" || typeof b === "string") {
     return a.toString() + b.toString();
   }
   return a + b;
-};
-
-
+}
 
 type UnknownEmployee = Employee | Admin;
 
@@ -97,20 +94,22 @@ type Animal = Bird | Horse;
 
 const moveAnimal = (animal: Animal) => {
   let speed;
-  switch(animal.type) {
+  switch (animal.type) {
     case "bird":
-     speed = animal.flyingSpeed;
-     break;
+      speed = animal.flyingSpeed;
+      break;
     case "horse":
       speed = animal.groundSpeed;
   }
-  console.log(`Movendo com a velocidade de ${speed}`)
-}
+  console.log(`Movendo com a velocidade de ${speed}`);
+};
 
-moveAnimal({type: "horse", groundSpeed: 10})
+moveAnimal({ type: "horse", groundSpeed: 10 });
 
 // Castando tipos
-const paragraph = <HTMLInputElement>document.getElementById("user-input")! as HTMLInputElement;
+const paragraph = (<HTMLInputElement>(
+  document.getElementById("user-input")!
+)) as HTMLInputElement;
 paragraph.value = "Alô";
 
 // Propriedades de Index
@@ -120,7 +119,7 @@ interface ErrorContainer {
 
 const errorBag: ErrorContainer = {
   email: "E-mail não válido",
-  usuario: "Precisa começar com uma letra maiuscúla"
+  usuario: "Precisa começar com uma letra maiuscúla",
 };
 
 // Sobrecarregamento de Função
@@ -136,8 +135,8 @@ const fetchedUserData = {
   job: {
     title: "CEO",
     description: "Minha Empresa",
-  } 
-}
+  },
+};
 
 console.log(fetchedUserData?.job?.title);
 
