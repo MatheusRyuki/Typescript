@@ -13,6 +13,7 @@ var Logger = function (logString) {
 };
 var withTemplate = function (template, hookId) {
     return function (constructor) {
+        console.log("Renderizando template");
         var hookEl = document.getElementById(hookId);
         var p = new constructor();
         if (hookEl) {
@@ -27,9 +28,39 @@ var Persona = (function () {
         console.log("Criando o objeto Pessoa...");
     }
     Persona = __decorate([
+        Logger("Logging - person"),
         withTemplate("<h1>My Person Object</h1>", "app")
     ], Persona);
     return Persona;
 }());
 var pers = new Persona();
 console.log(pers);
+var Log = function (target, propertyName) {
+    console.log("Decorador como propriedade");
+    console.log(target, propertyName);
+};
+var Produto = (function () {
+    function Produto(t, p) {
+        this.title = t;
+        this._price = p;
+    }
+    Object.defineProperty(Produto.prototype, "price", {
+        set: function (val) {
+            if (val > 0) {
+                this._price = val;
+            }
+            else {
+                throw new Error("Valor Inválido");
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Produto.prototype.getPriceWithTax = function (tax) {
+        return this._price * (1 + tax);
+    };
+    __decorate([
+        Log
+    ], Produto.prototype, "title", void 0);
+    return Produto;
+}());
