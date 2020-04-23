@@ -5,6 +5,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var Logger = function (logString) {
     return function (constructor) {
         console.log(logString);
@@ -39,6 +42,24 @@ var Log = function (target, propertyName) {
     console.log("Decorador como propriedade");
     console.log(target, propertyName);
 };
+var Log2 = function (target, name, descriptor) {
+    console.log("Decorador como Acessório");
+    console.log(target);
+    console.log(name);
+    console.log(descriptor);
+};
+var Log3 = function (target, name, descriptor) {
+    console.log("Decorador como Acessório de método");
+    console.log(target);
+    console.log(name);
+    console.log(descriptor);
+};
+var Log4 = function (target, name, position) {
+    console.log("Decorador como Acessório de parâmetro");
+    console.log(target);
+    console.log(name);
+    console.log(position);
+};
 var Produto = (function () {
     function Produto(t, p) {
         this.title = t;
@@ -62,5 +83,12 @@ var Produto = (function () {
     __decorate([
         Log
     ], Produto.prototype, "title", void 0);
+    __decorate([
+        Log2
+    ], Produto.prototype, "price", null);
+    __decorate([
+        Log3,
+        __param(0, Log4)
+    ], Produto.prototype, "getPriceWithTax", null);
     return Produto;
 }());
