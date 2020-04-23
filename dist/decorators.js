@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -15,14 +28,25 @@ var Logger = function (logString) {
     };
 };
 var withTemplate = function (template, hookId) {
-    return function (constructor) {
-        console.log("Renderizando template");
-        var hookEl = document.getElementById(hookId);
-        var p = new constructor();
-        if (hookEl) {
-            hookEl.innerHTML = template;
-            hookEl.querySelector("h1").textContent = p.name;
-        }
+    return function (OriginalConstructor) {
+        return (function (_super) {
+            __extends(class_1, _super);
+            function class_1() {
+                var _ = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    _[_i] = arguments[_i];
+                }
+                var _this = _super.call(this) || this;
+                console.log("Renderizando template");
+                var hookEl = document.getElementById(hookId);
+                if (hookEl) {
+                    hookEl.innerHTML = template;
+                    hookEl.querySelector("h1").textContent = _this.name;
+                }
+                return _this;
+            }
+            return class_1;
+        }(OriginalConstructor));
     };
 };
 var Persona = (function () {
@@ -92,3 +116,4 @@ var Produto = (function () {
     ], Produto.prototype, "getPriceWithTax", null);
     return Produto;
 }());
+var p1 = new Produto("Livro", 19);

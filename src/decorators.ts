@@ -10,13 +10,17 @@ const Logger = (logString: string) => {
 // Construindo Decoradores mais úteis
 
 const withTemplate = (template: string, hookId: string) => {
-  return (constructor: any) => {
-    console.log("Renderizando template");
-    const hookEl = document.getElementById(hookId);
-    const p = new constructor();
-    if (hookEl) {
-      hookEl.innerHTML = template;
-      hookEl.querySelector("h1")!.textContent = p.name;
+  return <T extends {new(...args: any[]): {name: string}} >(OriginalConstructor: T) => {  
+    return class extends OriginalConstructor {
+      constructor(..._: any[]) {
+        super();
+        console.log("Renderizando template");
+        const hookEl = document.getElementById(hookId);
+        if (hookEl) {
+          hookEl.innerHTML = template;
+          hookEl.querySelector("h1")!.textContent = this.name;
+        }
+      }
     }
   };
 };
@@ -87,3 +91,6 @@ class Produto {
     return this._price * (1 + tax);
   }
 }
+
+
+const p1 = new Produto("Livro", 19);
