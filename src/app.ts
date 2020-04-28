@@ -56,6 +56,38 @@ const validate = (validatableInput: Validatable) => {
   return isValid;
 };
 
+class ProjectList {
+  templateElement: HTMLTemplateElement;
+  hostElement: HTMLDivElement;
+  element: HTMLElement;
+
+  constructor(private type: "ativos" | "finalizados") {
+    this.templateElement = document.getElementById(
+      "project-list"
+    )! as HTMLTemplateElement;
+    this.hostElement = document.getElementById("app")! as HTMLDivElement;
+
+    const importedNode = document.importNode(
+      this.templateElement.content,
+      true
+    );
+    this.element = importedNode.firstElementChild as HTMLElement;
+    this.element.id = `${this.type}-projects`;
+    this.attach();
+    this.renderContent();
+  }
+
+  private renderContent() {
+    const listId = `${this.type}-projects-list`;
+    this.element.querySelector("ul")!.id = listId;
+    this.element.querySelector("h2")!.textContent = this.type.toUpperCase() + " PROJETOS";
+  }
+
+  private attach() {
+    this.hostElement.insertAdjacentElement("beforeend", this.element);
+  }
+}
+
 class ProjectInput {
   templateElement: HTMLTemplateElement;
   hostElement: HTMLDivElement;
@@ -103,22 +135,22 @@ class ProjectInput {
     const enteredPeople = this.peopleInputElement.value;
 
     const titleValidatable: Validatable = {
-      value:enteredTitle,
-      required: true
-    }
+      value: enteredTitle,
+      required: true,
+    };
 
     const descriptionValidatable: Validatable = {
       value: enteredDescription,
       required: true,
-      minLength: 5
-    }
+      minLength: 5,
+    };
 
     const peopleValidatable: Validatable = {
       value: +enteredPeople,
       required: true,
       min: 1,
-      max: 5
-    }
+      max: 5,
+    };
 
     if (
       !validate(titleValidatable) ||
@@ -154,3 +186,5 @@ class ProjectInput {
 }
 
 const prjInput = new ProjectInput();
+const activePrjList = new ProjectList("ativos");
+const finishedPrjList = new ProjectList("finalizados");
