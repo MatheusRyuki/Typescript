@@ -7,8 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var ProjectStatus;
 (function (ProjectStatus) {
-    ProjectStatus[ProjectStatus["Active"] = 0] = "Active";
-    ProjectStatus[ProjectStatus["Finished"] = 1] = "Finished";
+    ProjectStatus[ProjectStatus["Ativos"] = 0] = "Ativos";
+    ProjectStatus[ProjectStatus["Finalizdos"] = 1] = "Finalizdos";
 })(ProjectStatus || (ProjectStatus = {}));
 class Project {
     constructor(id, title, description, people, status) {
@@ -35,7 +35,7 @@ class ProjectState {
         this.listeners.push(listenerFn);
     }
     addProject(title, description, numOfPeople) {
-        const newProject = new Project(Math.random().toString(), title, description, numOfPeople, ProjectStatus.Active);
+        const newProject = new Project(Math.random().toString(), title, description, numOfPeople, ProjectStatus.Ativos);
         this.projects.push(newProject);
         for (const listenerFn of this.listeners) {
             listenerFn(this.projects.slice());
@@ -91,7 +91,14 @@ class ProjectList {
         this.element = importedNode.firstElementChild;
         this.element.id = `${this.type}-projects`;
         projectState.addListener((projects) => {
-            this.assignedProject = projects;
+            let relevatedProjects;
+            if (this.type === "ativos") {
+                relevatedProjects = projects.filter((prj) => prj.status === ProjectStatus.Ativos);
+            }
+            else {
+                relevatedProjects = projects.filter((prj) => prj.status !== ProjectStatus.Ativos);
+            }
+            this.assignedProject = relevatedProjects;
             this.renderProjects();
         });
         this.attach();
@@ -99,6 +106,7 @@ class ProjectList {
     }
     renderProjects() {
         const listEl = document.getElementById(`${this.type}-projects-list`);
+        listEl.innerHTML = "";
         for (const prjItem of this.assignedProject) {
             const listItem = document.createElement("li");
             listItem.textContent = prjItem.title;

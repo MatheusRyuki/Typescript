@@ -1,6 +1,6 @@
 enum ProjectStatus {
-  Active,
-  Finished,
+  Ativos,
+  Finalizdos,
 }
 
 class Project {
@@ -40,7 +40,7 @@ class ProjectState {
       title,
       description,
       numOfPeople,
-      ProjectStatus.Active
+      ProjectStatus.Ativos
     );
     this.projects.push(newProject);
     for (const listenerFn of this.listeners) {
@@ -129,7 +129,17 @@ class ProjectList {
     this.element.id = `${this.type}-projects`;
 
     projectState.addListener((projects: Project[]) => {
-      this.assignedProject = projects;
+      let relevatedProjects;
+      if (this.type === "ativos") {
+        relevatedProjects = projects.filter(
+          (prj) => prj.status === ProjectStatus.Ativos
+        );
+      } else {
+        relevatedProjects = projects.filter(
+          (prj) => prj.status !== ProjectStatus.Ativos
+        );
+      }
+      this.assignedProject = relevatedProjects;
       this.renderProjects();
     });
     this.attach();
@@ -140,7 +150,7 @@ class ProjectList {
     const listEl = document.getElementById(
       `${this.type}-projects-list`
     )! as HTMLUListElement;
-
+    listEl.innerHTML = "";
     for (const prjItem of this.assignedProject) {
       const listItem = document.createElement("li");
       listItem.textContent = prjItem.title;
