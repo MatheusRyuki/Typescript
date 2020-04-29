@@ -1,3 +1,20 @@
+enum ProjectStatus {
+  Active,
+  Finished,
+}
+
+class Project {
+  constructor(
+    public id: string,
+    public title: string,
+    public description: string,
+    public people: number,
+    public status: ProjectStatus
+  ) {}
+}
+
+type Listener = (items: Project[]) => void;
+
 class ProjectState {
   private projects: any[] = [];
   private listeners: any[] = [];
@@ -13,19 +30,20 @@ class ProjectState {
     return this.instance;
   }
 
-  public addListener(listenerFn: Function) {
+  public addListener(listenerFn: Listener) {
     this.listeners.push(listenerFn);
   }
 
   public addProject(title: string, description: string, numOfPeople: number) {
-    const newProject = {
-      id: Math.random().toString(),
+    const newProject = new Project(
+      Math.random().toString(),
       title,
       description,
       numOfPeople,
-    };
+      ProjectStatus.Active
+    );
     this.projects.push(newProject);
-    for(const listenerFn of this.listeners) {
+    for (const listenerFn of this.listeners) {
       listenerFn(this.projects.slice());
     }
   }
@@ -108,9 +126,9 @@ class ProjectList {
       true
     );
     this.element = importedNode.firstElementChild as HTMLElement;
-    this.element.id = `${this.type}-projects`
+    this.element.id = `${this.type}-projects`;
 
-    projectState.addListener((projects: any[]) => {
+    projectState.addListener((projects: Project[]) => {
       this.assignedProject = projects;
       this.renderProjects();
     });
@@ -119,7 +137,9 @@ class ProjectList {
   }
 
   private renderProjects() {
-    const listEl = document.getElementById(`${this.type}-projects-list`)! as HTMLUListElement;
+    const listEl = document.getElementById(
+      `${this.type}-projects-list`
+    )! as HTMLUListElement;
 
     for (const prjItem of this.assignedProject) {
       const listItem = document.createElement("li");
